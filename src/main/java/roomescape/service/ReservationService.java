@@ -46,7 +46,7 @@ public class ReservationService {
         Theme theme = themeRepository.findById(reservationRequestDTO.themeId())
                 .orElseThrow(() -> new RoomEscapeException(ThemeErrorCode.THEME_NOT_FOUND));
 
-        LocalDate date = LocalDate.parse(reservationRequestDTO.date());
+        LocalDate date = reservationRequestDTO.date();
 
         validateDuplicateReservation(date, time, theme);
 

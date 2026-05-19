@@ -53,7 +53,7 @@ class ReservationServiceTest {
 
         ReservationRequestDTO request = new ReservationRequestDTO(
                 "브라운",
-                "2026-08-05",
+                LocalDate.parse("2026-08-05"),
                 time.getId(),
                 theme.getId()
         );
@@ -79,7 +79,7 @@ class ReservationServiceTest {
 
         ReservationRequestDTO request = new ReservationRequestDTO(
                 "브라운",
-                "2025-08-05",
+                LocalDate.parse("2025-08-05"),
                 time.getId(),
                 theme.getId()
         );
@@ -100,7 +100,7 @@ class ReservationServiceTest {
 
         ReservationRequestDTO request = new ReservationRequestDTO(
                 "브라운",
-                "2026-08-05",
+                LocalDate.parse("2026-08-05"),
                 999L,
                 theme.getId()
         );
@@ -121,7 +121,7 @@ class ReservationServiceTest {
 
         ReservationRequestDTO request = new ReservationRequestDTO(
                 "브라운",
-                "2026-08-05",
+                LocalDate.parse("2026-08-05"),
                 time.getId(),
                 999L
         );
@@ -145,7 +145,7 @@ class ReservationServiceTest {
 
         ReservationRequestDTO request = new ReservationRequestDTO(
                 "브라운",
-                "2026-08-05",
+                LocalDate.parse("2026-08-05"),
                 time.getId(),
                 theme.getId()
         );
@@ -175,7 +175,7 @@ class ReservationServiceTest {
 
         ReservationRequestDTO request = new ReservationRequestDTO(
                 "브라운",
-                "2026-08-05",
+                LocalDate.parse("2026-08-05"),
                 time.getId(),
                 theme.getId()
         );

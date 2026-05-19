@@ -41,7 +41,7 @@ public class JdbcReservationRepository implements ReservationRepository {
                     resultSet.getString("reservation_theme_description"),
                     resultSet.getString("reservation_theme_image_url"));
             return Reservation.of(resultSet.getLong("reservation_id"), resultSet.getString("name"),
-                    LocalDate.parse(resultSet.getString("date")), time, theme);
+                    resultSet.getDate("name").toLocalDate(), time, theme);
         };
     }
 
@@ -123,8 +123,7 @@ public class JdbcReservationRepository implements ReservationRepository {
 
         Map<String, Object> params = Map.of("name", name);
 
-        List<Reservation> results = jdbcTemplate.query(sql, params, getReservationRowMapper());
-        return results;
+        return jdbcTemplate.query(sql, params, getReservationRowMapper());
     }
 
     @Override
@@ -163,7 +162,7 @@ public class JdbcReservationRepository implements ReservationRepository {
     @Override
     public boolean existsByDateAndTimeAndTheme(LocalDate date, ReservationTime time, Theme theme) {
         String sql = "select count(*) from reservation where date = :date AND time_id = :time_id AND theme_id = :theme_id";
-        SqlParameterSource params = new MapSqlParameterSource().addValue("date", date.toString())
+        SqlParameterSource params = new MapSqlParameterSource().addValue("date", date)
                 .addValue("time_id", time.getId()).addValue("theme_id", theme.getId());
         Integer count = jdbcTemplate.queryForObject(sql, params, Integer.class);
         return count > 0;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import java.time.LocalDate;
 
 public record ReservationRequestDTO(
         @NotBlank(message = "이름은 비어 있을 수 없습니다.")
@@ -11,7 +12,7 @@ public record ReservationRequestDTO(
 
         @NotNull(message = "예약 날짜는 필수입니다.")
         @JsonFormat(pattern = "yyyy-MM-dd")
-        String date,
+        LocalDate date,
 
         @NotNull(message = "시간 지정은 필수입니다.")
         @Positive(message = "시간 id는 양수여야 합니다.")

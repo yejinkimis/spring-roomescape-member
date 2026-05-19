@@ -87,7 +87,7 @@ public class JdbcReservationTimeRepository implements ReservationTimeRepository 
                 """;
 
         SqlParameterSource params = new MapSqlParameterSource()
-                .addValue("date", date.toString())
+                .addValue("date", date)
                 .addValue("theme_id", themeId);
 
         return jdbcTemplate.query(
