@@ -99,13 +99,14 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(id).orElseThrow(
                 () -> new RoomEscapeException(ReservationErrorCode.RESERVATION_NOT_FOUND)
         );
-        reservation.validateNotPastTime(LocalDateTime.now(clock));
+        LocalDateTime now = LocalDateTime.now(clock);
+        reservation.validateNotPastTime(now);
 
         ReservationTime time = reservationTimeRepository.findById(request.timeId()).orElseThrow(
                 () -> new RoomEscapeException(ReservationTimeErrorCode.RESERVATION_TIME_NOT_FOUND)
         );
 
-        validateUpdateAvailableTime(request.date(), time, LocalDateTime.now(clock));
+        validateUpdateAvailableTime(request.date(), time, now);
         validateDuplicateReservation(request.date(), time, reservation.getTheme());
 
         return ReservationResponseDTO.from(reservationRepository.update(id, request.date(), time));

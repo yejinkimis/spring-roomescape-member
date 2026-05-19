@@ -58,8 +58,9 @@ public class ThemeService {
 
     @Transactional(readOnly = true)
     public List<ThemeResponseDTO> getPopularThemes(Long weeks, Long limit) {
-        return themeRepository.findPopularThemes(LocalDate.now(clock).minusWeeks(weeks),
-                LocalDate.now(clock), limit).stream().map(ThemeResponseDTO::from).toList();
+        LocalDate now = LocalDate.now(clock);
+        return themeRepository.findPopularThemes(now.minusWeeks(weeks),
+                now, limit).stream().map(ThemeResponseDTO::from).toList();
     }
 
     @Transactional
