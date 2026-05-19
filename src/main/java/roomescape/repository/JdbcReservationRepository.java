@@ -41,7 +41,7 @@ public class JdbcReservationRepository implements ReservationRepository {
                     resultSet.getString("reservation_theme_description"),
                     resultSet.getString("reservation_theme_image_url"));
             return Reservation.of(resultSet.getLong("reservation_id"), resultSet.getString("name"),
-                    resultSet.getDate("name").toLocalDate(), time, theme);
+                    resultSet.getDate("date").toLocalDate(), time, theme);
         };
     }
 
