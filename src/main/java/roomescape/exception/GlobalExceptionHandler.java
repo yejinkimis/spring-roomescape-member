@@ -2,6 +2,8 @@ package roomescape.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(RoomEscapeException.class)
     public ResponseEntity<ErrorResponse> handleRoomEscapeException(
@@ -89,7 +93,7 @@ public class GlobalExceptionHandler {
                 .badRequest()
                 .body(new ErrorResponse(
                         "INVALID_ARGUMENT",
-                        e.getMessage(),
+                        "잘못된 요청입니다.",
                         null
                 ));
     }
@@ -98,6 +102,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleException(
             Exception e
     ) {
+        log.error("Unhandled server error occurred", e);
+
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorResponse(
